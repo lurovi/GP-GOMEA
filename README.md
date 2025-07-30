@@ -61,6 +61,7 @@ To install using [conda](https://www.anaconda.com/), run:
 conda env create -f environment.yml
 conda activate gpgomenv
 make
+pip3 install -r requirements.txt
 ```
 
 ### Docker

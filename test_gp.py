@@ -19,17 +19,23 @@ X_train, X_test, y_train, y_test = train_test_split( X, y, test_size=0.25, rando
 
 print('Running GP-GOMEA...')
 ea = GPG( 
-	gomea=True,  											# uses GOMEA as search algorithm
-	functions="+_-_*_p/_sqrt_plog_^2_tanh", 	# functions to use
-	coeffmut='0.5_0.5_0.5_10',		# mutate constants with prob. of 0.5, with std of 0.5*abs(curr. val), which decays by 0.5 every 10 gen without improvement
-	time=-1, generations=100, evaluations=-1, # time limit of 10s, no genereations or evaluations limit
-	initmaxtreeheight=3, 			# how tall trees are at initialization (they cannot grow taller when using GOMEA)
-	ims='4_1', 	 			# interleaved multistart scheme: run a larger population doubled every 4 gen of the smaller one, patience of 1 iteration(s) before terminating a suboptimal population
-	popsize=1000,  				# initial pop size for the first run
-	batchsize=256,				# batch size
-	parallel=4,				# in parallel on 4 cores
-	linearscaling=False, 			# whether to use a linear layer on top of the solutions (highly-recommended for real-world data!)
-	silent=False)				# log progress
+	time=-1, generations=100, evaluations=-1, popsize=1000, functions='+_*_-_p/_sqrt_plog_^2_tanh', tournament=5,
+		prob='symbreg', multiobj=False, linearscaling=True, erc=True, classweights = False,
+		gomea=False, gomfos='',
+		subcross=0.5, submut=0.5, reproduction=0.0,
+		sblibtype=False, sbrdo=0.0, sbagx=0.0,
+		unifdepthvar=True, elitism=1,
+		ims=False, syntuniqinit=1000,
+		initmaxtreeheight=4, inittype=False,
+		maxtreeheight=12, maxsize=40,
+		validation=False,
+		coeffmut=False,
+		gomcoeffmutstrat=False,
+		batchsize=False,
+		seed=SEED, parallel=1, caching=False, 
+		silent=False, logtofile=False
+	
+	)				
 ea.fit(X_train, y_train)
 
 print("\n")
