@@ -8,6 +8,7 @@ from gpgomea import GPGOMEA
 from sklearn.metrics import mean_squared_error
 import inspect
 import copyreg
+import numpy as np
 
 
 class GPGOMEARegressor(BaseEstimator, RegressorMixin):
@@ -85,7 +86,7 @@ class GPGOMEARegressor(BaseEstimator, RegressorMixin):
 
 	def predict(self, X, y=None):
 		prediction = self._ea.predict(X)
-		return prediction
+		return np.core.umath.clip(prediction, -1e+100, 1e+100)
 
 	def score(self, X, y=None):
 		if y is None:
