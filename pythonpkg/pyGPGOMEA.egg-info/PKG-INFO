@@ -5,5 +5,3 @@ Summary: Python GP-GOMEA
 Home-page: https://github.com/marcovirgolin/GP-GOMEA
 Author: Marco Virgolin
 Author-email: marco.virgolin@cwi.nl
-Requires-Dist: scikit-learn
-Requires-Dist: sympy
